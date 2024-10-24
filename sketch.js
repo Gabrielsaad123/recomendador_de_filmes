@@ -1,18 +1,53 @@
-// ação, aventura, fantasia, comédia de ação, animação, drama, ficção científica
-
-// vingadores ultimato, 12, ação e aventura
-// vingadores guerra infinita, 12, ação e fantasia 
-
-// kung fu panda, LIVRE, comédia de ação, aventura e animação
-// madacascar, LIVRE,comédia, aventura e animação
-// velozes e furiosos, 14, ação, aventura e drama
-// maze runner, 16, ação e ficção científica
-
+let campoIdade;
+let campoFantasia;
+let campoAventura;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 400);
+  createElement("h2", "Recomendador de filmes");
+  createSpan("Sua idade:");
+  campoIdade = createInput("5");
+  campoFantasia = createCheckbox("Gosta de fantasia?");
+  campoAventura = createCheckbox("Gosta de aventura?");
 }
 
 function draw() {
-  background(220);
+  background("white");
+  let idade = campoIdade.value();
+  let gostaDeFantasia = campoFantasia.checked();
+  let gostaDeAventura = campoAventura.checked();
+  let recomendacao = geraRecomendacao(idade, gostaDeFantasia, gostaDeAventura);
+
+  fill(color(76, 0, 115));
+  textAlign(CENTER, CENTER);
+  textSize(38);
+  text(recomendacao, width / 2, height / 2);
+}
+
+function geraRecomendacao(idade, gostaDeFantasia, gostaDeAventura) {
+  if (idade >= 10) {
+    if (idade >= 14) {
+      return "vingadores guerra infinita";
+    } else {
+      if (idade >= 12) {
+        if(gostaDeFantasia || gostaDeAventura) {
+          return "kung fu panda";          
+        } else{
+         return "kung fu panda";
+        }
+      } else {
+        if (gostaDeFantasia) {
+          return "kong:a ilha da caveira";
+        } else {
+          return "o senhor dos aneis";
+        }
+      }
+    }
+  } else {
+    if (gostaDeFantasia) {
+      return "jumanji";
+    } else {
+      return "as cronicas de narnia";
+    }
+  }
 }
